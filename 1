@@ -1,0 +1,95 @@
+#include <vector> 
+#include "iostream" 
+
+using namespace std;
+
+class superArr {
+public:
+    int SizeArr = 0;
+    int* arr;
+
+    superArr() {
+        cout << "Hello" << endl;
+    }
+
+    superArr(int n = 0) {
+        arr = new int[n];
+        SizeArr = n;
+    }
+
+    void inputArr() {
+        cout << "Введите массив " << endl;
+        for (int i = 0; i < SizeArr; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void print() {
+        for (int i = 0; i < SizeArr; i++) {
+            cout << arr[i] << " ";
+        }
+    }
+
+    void array_copy() {
+        int end_arr[5]{};
+        cout << endl << "Копирование массива: " << endl;
+        for (int i = 0; i < SizeArr; i++) {
+            end_arr[i] = arr[i];
+            cout << end_arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    void resize() {
+        cout << endl << "Введите элемент, который хотите добавить: " << endl;
+        int a;
+        cin >> a;
+        vector<int> vec;
+        int newSize = SizeArr + 1;
+        for (int j = 0; j < SizeArr; j++) {
+            vec.push_back(arr[j]);
+        }
+        vec.push_back(a);
+        cout << "Итог: " << endl;
+        for (int i = 0; i < newSize; i++) {
+            cout << vec[i] << " ";
+        }
+        cout << endl;
+    }
+
+    void proizved() {
+        int pr = 1;
+        cout << endl << "Произведение элементов массива: " << endl;
+        for (int i = 0; i < SizeArr; i++) {
+            pr *= arr[i];
+        }
+        cout << pr << endl;
+    }
+
+    void deleteArr(int ind, int num) {
+        if (ind + num > SizeArr) return;
+        cout << endl;
+        int newSize = SizeArr - (num + 1);
+        int newArr[newSize];
+        for (int i = 0; i < ind; i++) {
+            newArr[i] = arr[i];
+        }
+        for (int i = ind + num; i < SizeArr; i++) {
+            newArr[i - num] = arr[i];
+        }
+        for (int i = 0; i < newSize + 1; i++) {
+            cout << newArr[i] << " ";
+        }
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    superArr arr(5);
+    //superArr vector();
+    arr.inputArr();
+    arr.print();
+    arr.resize();
+    arr.proizved();
+    arr.deleteArr(2, 2);
+}
